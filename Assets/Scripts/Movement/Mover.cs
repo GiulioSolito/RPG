@@ -1,53 +1,55 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mover : MonoBehaviour
+namespace RPG.Movement
 {
-    [SerializeField] private Transform target; 
+    public class Mover : MonoBehaviour, IAction
+    {
+        [SerializeField] private Transform target; 
     
-    private Ray ray;
+        private Ray ray;
 
-    private NavMeshAgent agent;
-    private Animator anim;
+        private NavMeshAgent agent;
+        private Animator anim;
+        private ActionScheduler scheduler;
 
-    void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        anim = GetComponentInChildren<Animator>();
-    }
-
-    void Update()
-    {
-        if (Input.GetMouseButton(0))
+        void Awake()
         {
-            MoveToCursor();
+            agent = GetComponent<NavMeshAgent>();
+            anim = GetComponent<Animator>();
+            scheduler = GetComponent<ActionScheduler>();
         }
 
-        UpdateAnimator();
-    }
-    
-    void MoveToCursor()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        void Update()
+        {
+            UpdateAnimator();
+        }
+
+        public void StartMoveAction(Vector3 destination)
+        {
+            scheduler.StartAction(this);
+            MoveTo(destination);
+        }
+
+        public void MoveTo(Vector3 destination)
+        {
+            agent.destination = destination;
+            agent.isStopped = false;
+        }
         
-        bool hasHit = Physics.Raycast(ray, out hit);
-
-        if (hasHit)
+        void UpdateAnimator()
         {
-            agent.destination = hit.point;
-        }
-    }
+            Vector3 velocity = agent.velocity;
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+            float speed = localVelocity.z;
 
-    void UpdateAnimator()
-    {
-        Vector3 velocity = agent.velocity;
-        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-        float speed = localVelocity.z;
-
-        anim.SetFloat("Speed", speed);
+            anim.SetFloat("Speed", speed);
+        }       
+        
+        public void Cancel()
+        {
+            agent.isStopped = true;
+        } 
     }
 }
