@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace RPG.Combat
+namespace RPG.Core
 {
     public class Health : MonoBehaviour
     {
@@ -10,10 +9,12 @@ namespace RPG.Combat
         public bool IsDead { get; private set; }
 
         private Animator anim;
+        private ActionScheduler scheduler;
         
-        private void Awake()
+        void Awake()
         {
             anim = GetComponent<Animator>();
+            scheduler = GetComponent<ActionScheduler>();
         }
 
         public void TakeDamage(float damage)
@@ -30,8 +31,9 @@ namespace RPG.Combat
 
         void Die()
         {
-            anim.SetTrigger("Die");
             IsDead = true;
+            anim.SetTrigger("Die");
+            scheduler.CancelCurrentAction();
         }
     }
 }

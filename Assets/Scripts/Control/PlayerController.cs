@@ -1,4 +1,5 @@
 ﻿using RPG.Combat;
+using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 
@@ -8,15 +9,18 @@ namespace RPG.Control
     {
         private Mover mover;
         private Fighter fighter;
+        private Health health;
         
         void Awake()
         {
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
         }
 
         void Update()
         {
+            if (health.IsDead) return;
             if (InteractWithCombat()) return;
             if(InteractWithMovement()) return;
         }
@@ -44,19 +48,20 @@ namespace RPG.Control
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.collider.GetComponent<CombatTarget>();
-                
-                if (fighter.CanAttack(target) == false)
+
+                if (target == null) continue;
+                if (fighter.CanAttack(target.gameObject) == false)
                 {
                     continue;
                 }
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButton(0))
                 {
                     Fighter fighter = GetComponent<Fighter>();
 
                     if (fighter != null)
                     {
-                        fighter.Attack(target);
+                        fighter.Attack(target.gameObject);
                     }
                 }
                 return true;
