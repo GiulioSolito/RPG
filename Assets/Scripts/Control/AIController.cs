@@ -19,6 +19,7 @@ namespace RPG.Control
         private GameObject player;
 
         private Vector3 guardPosition;
+        private Quaternion guardRotation;
         private float timeSinceLastSawPlayer = Mathf.Infinity;
         private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
         private int currentWaypointIndex = 0;
@@ -40,6 +41,7 @@ namespace RPG.Control
         void Start()
         {
             guardPosition = transform.position;
+            guardRotation = transform.rotation;
         }
 
         void Update()
@@ -70,6 +72,11 @@ namespace RPG.Control
         void PatrolBehaviour()
         {
             Vector3 nextPosition = guardPosition;
+
+            if (transform.position == guardPosition)
+            {
+                transform.rotation= Quaternion.RotateTowards(transform.rotation, guardRotation, 1);
+            }
 
             if (patrolPath != null)
             {

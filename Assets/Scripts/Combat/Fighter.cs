@@ -1,4 +1,5 @@
-﻿using RPG.Core;
+﻿using System;
+using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 
@@ -6,10 +7,11 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] private float attackRange = 2f;
-        [SerializeField] private float attackRate = 1f;
-        [SerializeField] private float damage = 5f;
         private float nextAttack;
+        [SerializeField] private Transform rightHandTransform;
+        [SerializeField] private Transform leftHandTransform;
+        [SerializeField] private Weapon defaultWeapon;
+        private Weapon currentWeapon;
         
         private Health target;
 
@@ -22,6 +24,11 @@ namespace RPG.Combat
             mover = GetComponent<Mover>();
             scheduler = GetComponent<ActionScheduler>();
             anim = GetComponent<Animator>();
+        }
+
+        void Start()
+        {
+            EquipWeapon(defaultWeapon);
         }
 
         void Update()
@@ -39,10 +46,16 @@ namespace RPG.Combat
                 AttackBehaviour();
             }
         }
+        
+        public void EquipWeapon(Weapon weapon)
+        {
+            currentWeapon = weapon;
+            weapon.Spawn(rightHandTransform, leftHandTransform, anim);
+        }
 
         bool IsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) <= attackRange;
+            return Vector3.Distance(transform.position, target.transform.position) <= currentWeapon.GetAttackRange();
         }
 
         public bool CanAttack(GameObject combatTarget)
@@ -67,7 +80,7 @@ namespace RPG.Combat
             {
                 //This will trigger the Hit() event
                 TriggerAttack();
-                nextAttack = Time.time + attackRate;
+                nextAttack = Time.time + currentWeapon.GetAttackRate();
             }
         }
 
@@ -81,7 +94,21 @@ namespace RPG.Combat
         void Hit()
         {
             if (target == null) return;
-            target.TakeDamage(damage);
+
+            if (currentWeapon.HasProjectile())
+            {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            }
+            else
+            {
+                target.TakeDamage(currentWeapon.GetDamage());
+            }
+        }
+
+        //Animation Event
+        void Shoot()
+        {
+            Hit();
         }
 
         void StopAttack()

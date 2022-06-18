@@ -22,9 +22,9 @@ namespace RPG.SceneManagement
 
         IEnumerator Start()
         {
-            fader.FadeOutImmediate();
+            // fader.FadeOutImmediate();
             yield return savingSystem.LoadLastScene(DefaultSaveFile);
-            yield return fader.FadeIn(fadeInTime);
+            // yield return fader.FadeIn(fadeInTime);
         }
 
         void Update()
