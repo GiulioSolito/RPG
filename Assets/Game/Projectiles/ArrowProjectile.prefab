@@ -67,7 +67,7 @@ MonoBehaviour:
   maxLifetime: 10
   destroyOnHit:
   - {fileID: 480960381287968372}
-  lifeAfterImpact: 2
+  lifeAfterImpact: 0.2
 --- !u!1 &4471574431017906844
 GameObject:
   m_ObjectHideFlags: 0

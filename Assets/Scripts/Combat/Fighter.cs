@@ -1,11 +1,12 @@
 ﻿using System;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Saving;
 using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         private float nextAttack;
         [SerializeField] private Transform rightHandTransform;
@@ -14,7 +15,6 @@ namespace RPG.Combat
         private Weapon currentWeapon;
         
         private Health target;
-
         private Mover mover;
         private ActionScheduler scheduler;
         private Animator anim;
@@ -28,7 +28,10 @@ namespace RPG.Combat
 
         void Start()
         {
-            EquipWeapon(defaultWeapon);
+            if (currentWeapon == null)
+            {
+                EquipWeapon(defaultWeapon);
+            }
         }
 
         void Update()
@@ -122,6 +125,18 @@ namespace RPG.Combat
             StopAttack();
             target = null;
             mover.Cancel();
+        }
+
+        public object CaptureState()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            string weaponName = (string) state;
+            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            EquipWeapon(weapon);
         }
     }
 }
