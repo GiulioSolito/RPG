@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using RPG.Attributes;
 using RPG.Core;
 using RPG.Saving;
 using UnityEngine;
@@ -77,7 +77,7 @@ namespace RPG.Movement
         public void RestoreState(object state)
         {
             MoverSaveData data = (MoverSaveData) state;
-            GetComponent<NavMeshAgent>().Warp(data.position.ToVector());
+            agent.Warp(data.position.ToVector());
             transform.eulerAngles = data.rotation.ToVector();
         }
     }

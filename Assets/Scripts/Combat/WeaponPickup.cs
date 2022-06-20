@@ -11,11 +11,10 @@ namespace RPG.Combat
         
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                other.GetComponent<Fighter>().EquipWeapon(weapon);
-                StartCoroutine(RespawnPickup(respawnTime));
-            }
+            if (!other.CompareTag("Player")) return;
+            
+            other.GetComponent<Fighter>().EquipWeapon(weapon);
+            StartCoroutine(RespawnPickup(respawnTime));
         }
 
         IEnumerator RespawnPickup(float seconds)

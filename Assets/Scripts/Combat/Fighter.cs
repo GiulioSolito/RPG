@@ -1,12 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
+using RPG.Stats;
 using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         private float nextAttack;
         [SerializeField] private Transform rightHandTransform;
@@ -16,12 +18,14 @@ namespace RPG.Combat
         
         private Health target;
         private Mover mover;
+        private BaseStats baseStats;
         private ActionScheduler scheduler;
         private Animator anim;
 
         void Awake()
         {
             mover = GetComponent<Mover>();
+            baseStats = GetComponent<BaseStats>();
             scheduler = GetComponent<ActionScheduler>();
             anim = GetComponent<Animator>();
         }
@@ -54,6 +58,11 @@ namespace RPG.Combat
         {
             currentWeapon = weapon;
             weapon.Spawn(rightHandTransform, leftHandTransform, anim);
+        }
+
+        public Health GetTarget()
+        {
+            return target;
         }
 
         bool IsInRange()
@@ -98,13 +107,15 @@ namespace RPG.Combat
         {
             if (target == null) return;
 
+            float damage = baseStats.GetStat(Stat.Damage);
+            
             if (currentWeapon.HasProjectile())
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else
             {
-                target.TakeDamage(currentWeapon.GetDamage());
+                target.TakeDamage(gameObject, damage);
             }
         }
 
@@ -119,7 +130,23 @@ namespace RPG.Combat
             anim.ResetTrigger("Attack");
             anim.SetTrigger("StopAttack");
         }
-                
+        
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.GetDamage();
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.GetPercantageBonus();
+            }
+        }
+
         public void Cancel()
         {
             StopAttack();

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;

@@ -18,13 +18,15 @@ namespace RPG.SceneManagement
         {
             savingSystem = GetComponent<SavingSystem>();
             fader = FindObjectOfType<Fader>();
+
+            // StartCoroutine(LoadLastScene());
         }
 
-        IEnumerator Start()
+        IEnumerator LoadLastScene()
         {
-            // fader.FadeOutImmediate();
             yield return savingSystem.LoadLastScene(DefaultSaveFile);
-            // yield return fader.FadeIn(fadeInTime);
+            fader.FadeOutImmediate();
+            yield return fader.FadeIn(fadeInTime);
         }
 
         void Update()
