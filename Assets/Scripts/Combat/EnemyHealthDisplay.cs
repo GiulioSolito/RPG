@@ -25,7 +25,7 @@ namespace RPG.Combat
             }
 
             Health health = fighter.GetTarget();
-            healthText.text = $"Health: {health.GetHealth():0} / {health.GetMaxHealth():0}";
+            healthText.text = $"Enemy: {health.GetHealth():0} / {health.GetMaxHealth():0}";
         }
     }
 }

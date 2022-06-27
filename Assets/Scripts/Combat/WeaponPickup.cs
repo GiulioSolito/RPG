@@ -1,19 +1,36 @@
 ﻿using System;
 using System.Collections;
+using RPG.Control;
+using RPG.Movement;
 using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class WeaponPickup : MonoBehaviour
+    public class WeaponPickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] private Weapon weapon;
         [SerializeField] private float respawnTime = 5f;
+
+        private Fighter callingFighter;
         
-        void OnTriggerEnter(Collider other)
+        // void OnTriggerEnter(Collider other)
+        // {
+        //     if (!other.CompareTag("Player")) return;
+        //
+        //     callingFighter = other.GetComponent<Fighter>();
+        //     
+        //     Pickup(callingFighter);
+        // }
+
+        public void StartPickup()
         {
-            if (!other.CompareTag("Player")) return;
-            
-            other.GetComponent<Fighter>().EquipWeapon(weapon);
+            Pickup(callingFighter);
+        }
+        
+        void Pickup(Fighter fighter)
+        {
+            fighter.EquipWeapon(weapon);
+            fighter.GetComponent<ItemCollector>().StopPickup();
             StartCoroutine(RespawnPickup(respawnTime));
         }
 
@@ -32,6 +49,25 @@ namespace RPG.Combat
             {
                 child.gameObject.SetActive(shouldShow);
             }
+        }
+        
+        public CursorType GetCursorType()
+        {
+            return CursorType.Pickup;
+        }
+
+        public bool HandleRaycast(PlayerController callingController)
+        {
+            ItemCollector collector = callingController.GetComponent<ItemCollector>();
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                callingFighter = callingController.GetComponent<Fighter>();
+                collector.StartPickupCollector(this);
+                // Pickup(callingController.GetComponent<Fighter>());
+            }
+
+            return true;
         }
     }
 }
