@@ -3,6 +3,7 @@ using RPG.Attributes;
 using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 namespace RPG.Control
@@ -18,11 +19,13 @@ namespace RPG.Control
         }
 
         [SerializeField] private CursorMapping[] cursorMappings;
+        [SerializeField] private float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] private float maxNavPathLength = 40f;
         
         private Mover mover;
         private Fighter fighter;
         private Health health;
-        
+
         void Awake()
         {
             mover = GetComponent<Mover>();
@@ -90,20 +93,62 @@ namespace RPG.Control
         
         bool InteractWithMovement()
         {
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            Vector3 target;
+            bool hasHit = RaycastNavMesh(out target);
 
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    mover.StartMoveAction(hit.point, 1f);
+                    mover.StartMoveAction(target, 1f);
                 }
 
                 SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        bool RaycastNavMesh(out Vector3 target)
+        {
+            target = Vector3.back;
+            
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+
+            if (hasHit == false) return false;
+
+            NavMeshHit navMeshHit;
+            bool hasCastToNavMesh = NavMesh.SamplePosition(
+                hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+
+            if (hasCastToNavMesh == false) return false;
+            
+            target = navMeshHit.position;
+
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(
+                transform.position, target, NavMesh.AllAreas, path);
+
+            if (hasPath == false) return false;
+            if (path.status != NavMeshPathStatus.PathComplete) return false;
+            if (GetPathLength(path) > maxNavPathLength) return false;
+            
+            return true;
+        }
+
+        float GetPathLength(NavMeshPath path)
+        {
+            float total = 0;
+
+            if (path.corners.Length < 2) return total;
+
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                total += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            }
+            
+            return total;
         }
 
         void SetCursor(CursorType type)
