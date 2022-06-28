@@ -78,7 +78,6 @@ namespace RPG.Combat
             {
                 callingFighter = callingController.gameObject;
                 collector.StartPickupCollector(this);
-                // Pickup(callingController.GetComponent<Fighter>());
             }
 
             return true;

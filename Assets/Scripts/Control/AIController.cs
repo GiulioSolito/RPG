@@ -10,18 +10,24 @@ namespace RPG.Control
     {
         [SerializeField] private float chaseDistance = 5f;
         [SerializeField] private float suspicionTime = 3f;
+        [SerializeField] private float aggroCooldownTime = 5f;
+        
         [SerializeField] private PatrolPath patrolPath;
         [SerializeField] private float waypointTolerance = 1f;
         [SerializeField] private float waypointWaitTime = 3f;
         [Range(0,1)]
         [SerializeField] private float patrolSpeedFraction = 0.2f;
 
+        [SerializeField] private float shoutDistance = 5f;
+
         private GameObject player;
 
-        private Vector3 guardPosition;
-        private Quaternion guardRotation;
+        public Vector3 guardPosition;
+        public Quaternion guardRotation;
+        
         private float timeSinceLastSawPlayer = Mathf.Infinity;
         private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+        private float timeSinceAggravated = Mathf.Infinity;
         private int currentWaypointIndex = 0;
         
         private Mover mover;
@@ -47,7 +53,7 @@ namespace RPG.Control
         void Update()
         {
             if (health.IsDead) return;
-            if (InAttackRange() && fighter.CanAttack(player))
+            if (IsAggravated() && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
@@ -63,19 +69,26 @@ namespace RPG.Control
             UpdateTimers();
         }
 
+        public void Aggravate()
+        {
+            timeSinceAggravated = 0;
+            
+        }
+        
         void UpdateTimers()
         {
             timeSinceLastSawPlayer += Time.deltaTime;
             timeSinceArrivedAtWaypoint += Time.deltaTime;
+            timeSinceAggravated += Time.deltaTime;
         }
 
         void PatrolBehaviour()
         {
             Vector3 nextPosition = guardPosition;
 
-            if (transform.position == guardPosition)
+            if (Vector3.Distance(transform.position, guardPosition) < Mathf.Epsilon)
             {
-                transform.rotation= Quaternion.RotateTowards(transform.rotation, guardRotation, 1);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, guardRotation, 1);
             }
 
             if (patrolPath != null)
@@ -119,12 +132,28 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
+            
+            AggravateNearbyEnemies();
         }
 
-        bool InAttackRange()
+        void AggravateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+
+            foreach (RaycastHit hit in hits)
+            {
+                AIController controller = hit.collider.GetComponent<AIController>();
+
+                if (controller == null) continue;
+                
+                controller.Aggravate();
+            }
+        }
+
+        bool IsAggravated()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            return distanceToPlayer <= chaseDistance;
+            return distanceToPlayer <= chaseDistance || timeSinceAggravated < aggroCooldownTime;
         }
 
         void OnDrawGizmosSelected()

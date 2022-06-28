@@ -19,7 +19,7 @@ namespace RPG.SceneManagement
             savingSystem = GetComponent<SavingSystem>();
             fader = FindObjectOfType<Fader>();
 
-            // StartCoroutine(LoadLastScene());
+            StartCoroutine(LoadLastScene());
         }
 
         IEnumerator LoadLastScene()
@@ -41,7 +41,7 @@ namespace RPG.SceneManagement
                 Load();
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.Delete))
             {
                 Delete();
             }
