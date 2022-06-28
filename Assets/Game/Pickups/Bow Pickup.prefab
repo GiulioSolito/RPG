@@ -72,17 +72,17 @@ PrefabInstance:
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 37.763927
       objectReference: {fileID: 0}
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.5198665
       objectReference: {fileID: 0}
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 25.164745
       objectReference: {fileID: 0}
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
@@ -92,17 +92,17 @@ PrefabInstance:
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1160373504677382778, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
@@ -127,6 +127,12 @@ PrefabInstance:
     - target: {fileID: 9213221516119658330, guid: cb1fda9644a16ed4eb230354bb826b71,
         type: 3}
       propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: b55d1dd4bca0f4c4b8316faf200ddf6c,
+        type: 2}
+    - target: {fileID: 9213221516119658330, guid: cb1fda9644a16ed4eb230354bb826b71,
+        type: 3}
+      propertyPath: weaponConfig
       value: 
       objectReference: {fileID: 11400000, guid: b55d1dd4bca0f4c4b8316faf200ddf6c,
         type: 2}

@@ -1,15 +1,21 @@
 ﻿using System;
 using RPG.Core;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace RPG.Stats
 {
     public class BaseStats : MonoBehaviour
     {
+        [TabGroup("NPC Level")]
         [Range(1, 99)] [SerializeField] private int startingLevel = 1;
+        [TabGroup("Class")]
         [SerializeField] private CharacterClass characterClass;
+        [TabGroup("Progression")]
         [SerializeField] private Progression progression;
+        [TabGroup("Level Up Particle")]
         [SerializeField] private GameObject levelUpParticleEffect;
+        [TabGroup("Modifier")]
         [SerializeField] private bool shouldUseModifiers = false;
         
         public event Action onLevelUp;
