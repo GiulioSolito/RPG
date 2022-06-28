@@ -1,4 +1,5 @@
-﻿using RPG.Attributes;
+﻿using System;
+using RPG.Attributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -57,18 +58,25 @@ namespace RPG.Combat
         {
             Health health = other.GetComponent<Health>();
 
-            if (health != target) return;
-            if (health.IsDead) return;
+            if (other.gameObject.layer == LayerMask.NameToLayer("Ignore Raycast") || 
+                other.gameObject.layer == LayerMask.NameToLayer("Projectile")) return;
             
-            target.TakeDamage(instigator, damage);
+            if (health == target)
+            {
+                if (health.IsDead) return;
+                target.TakeDamage(instigator, damage);
+            }
 
             speed = 0;
-            
             onHit.Invoke();
             
-            if (hitEffect != null)
+            if (hitEffect != null && health == target)
             {
                 Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+            }
+            else if (hitEffect != null && health != target)
+            {
+                Instantiate(hitEffect, transform.position, transform.rotation);
             }
 
             foreach (GameObject toDestroy in destroyOnHit)

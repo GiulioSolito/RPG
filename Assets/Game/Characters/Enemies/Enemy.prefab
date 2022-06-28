@@ -122,6 +122,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 1532392227974883059, guid: 750e3c6876a501e42b5827ec7a3d24d1,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532392227974883059, guid: 750e3c6876a501e42b5827ec7a3d24d1,
+        type: 3}
       propertyPath: defaultWeapon
       value: 
       objectReference: {fileID: 11400000, guid: feacbf7c089931d4383d44e23d329204,
@@ -145,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2376877559933315332, guid: 750e3c6876a501e42b5827ec7a3d24d1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2743854248364372387, guid: 750e3c6876a501e42b5827ec7a3d24d1,
         type: 3}
@@ -306,13 +316,22 @@ MonoBehaviour:
   chaseDistance: 5
   suspicionTime: 5
   aggroCooldownTime: 5
+  angle: 80
+  height: 2
+  meshColor: {r: 1, g: 0, b: 0, a: 1}
+  scanFrequency: 30
+  layers:
+    serializedVersion: 2
+    m_Bits: 64
+  occulusionLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  objects: []
   patrolPath: {fileID: 0}
   waypointTolerance: 1
   waypointWaitTime: 3
   patrolSpeedFraction: 0.2
   shoutDistance: 10
-  guardPosition: {x: 0, y: 0, z: 0}
-  guardRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &4545213759292618588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8196697675836667564, guid: 750e3c6876a501e42b5827ec7a3d24d1,
