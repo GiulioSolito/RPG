@@ -15,6 +15,7 @@ namespace RPG.Combat
         [SerializeField] private GameObject[] destroyOnHit;
         [SerializeField] private float lifeAfterImpact = 2f;
         [SerializeField] private UnityEvent onHit;
+        [SerializeField] private Transform projectileOwner;
 
         private Health target;
         private GameObject instigator;
@@ -36,6 +37,12 @@ namespace RPG.Combat
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
+        public Transform SetOwner(Transform owner)
+        {
+            projectileOwner = owner;
+            return owner;
+        }
+        
         public void SetTarget(Health target, GameObject instigator, float damage)
         {
             this.target = target;
@@ -58,12 +65,11 @@ namespace RPG.Combat
         {
             Health health = other.GetComponent<Health>();
 
-            if (other.gameObject.layer == LayerMask.NameToLayer("Ignore Raycast") || 
-                other.gameObject.layer == LayerMask.NameToLayer("Projectile")) return;
+            if (other.transform == projectileOwner) return;
+            if (health.IsDead) return;
             
             if (health == target)
             {
-                if (health.IsDead) return;
                 target.TakeDamage(instigator, damage);
             }
 

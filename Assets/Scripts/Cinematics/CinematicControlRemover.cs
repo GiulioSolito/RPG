@@ -1,4 +1,5 @@
 ﻿using System;
+using RPG.Attributes;
 using RPG.Control;
 using RPG.Core;
 using UnityEngine;
@@ -31,11 +32,13 @@ namespace RPG.Cinematics
         {
             player.GetComponent<ActionScheduler>().CancelCurrentAction();
             player.GetComponent<PlayerController>().enabled = false;
+            player.GetComponent<Health>().SetInvuln(true);
         }
 
         void EnableControl(PlayableDirector director)
         {
             player.GetComponent<PlayerController>().enabled = true;
+            player.GetComponent<Health>().SetInvuln(false);
         }
     }
 }

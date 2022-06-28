@@ -4987,6 +4987,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 438
 --- !u!1 &5274646682955494591
 GameObject:
   m_ObjectHideFlags: 0

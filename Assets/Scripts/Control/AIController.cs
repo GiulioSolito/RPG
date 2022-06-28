@@ -169,7 +169,6 @@ namespace RPG.Control
 
         void PatrolBehaviour()
         {
-            print("patrol");
             Vector3 nextPosition = guardPosition;
 
             if (Vector3.Distance(transform.position, guardPosition) < Mathf.Epsilon)
@@ -232,7 +231,7 @@ namespace RPG.Control
                 if (controller == this) continue;
                 if (controller == null) continue;
                 
-                // controller.Aggravate();
+                controller.Aggravate();
             }
         }
 

@@ -45,6 +45,11 @@ namespace RPG.SceneManagement
             {
                 Delete();
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
 
         public void Save()

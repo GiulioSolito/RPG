@@ -10,6 +10,7 @@ namespace RPG.Attributes
     {
         [SerializeField] private float regenerationPercentage = 70f;
         [SerializeField] private TakeDamageEvent takeDamage;
+        [SerializeField] private bool isInvulnerable = false;
         [SerializeField] private UnityEvent onDie;
 
         [System.Serializable]
@@ -51,6 +52,7 @@ namespace RPG.Attributes
         public void TakeDamage(GameObject instigator, float damage)
         {
             if (IsDead) return;
+            if (isInvulnerable) return;
 
             health = Mathf.Max(health - damage, 0);
             takeDamage.Invoke(damage);
@@ -67,7 +69,12 @@ namespace RPG.Attributes
         {
             health = Mathf.Min(health + healthToRestore, GetMaxHealth());
         }
-        
+
+        public void SetInvuln(bool invuln)
+        {
+            isInvulnerable = invuln;
+        }
+
         public float GetHealth()
         {
             return health;
