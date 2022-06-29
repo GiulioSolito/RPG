@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using GameDevTV.Inventories;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
-using RPG.Saving;
+using GameDevTV.Saving;
 using RPG.Stats;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         [BoxGroup("Hand Transforms")]
         [SerializeField] private Transform rightHandTransform;
@@ -24,17 +26,35 @@ namespace RPG.Combat
         private float nextAttack;
         
         private Health target;
+        private Equipment equipment;
         private Mover mover;
         private BaseStats baseStats;
         private ActionScheduler scheduler;
         private Animator anim;
-
+        
         void Awake()
         {
             mover = GetComponent<Mover>();
             baseStats = GetComponent<BaseStats>();
             scheduler = GetComponent<ActionScheduler>();
             anim = GetComponent<Animator>();
+            equipment = GetComponent<Equipment>();
+        }
+
+        void OnEnable()
+        {
+            if (equipment)
+            {
+                equipment.equipmentUpdated += UpdateWeapon;
+            }
+        }
+        
+        void OnDisable()
+        {
+            if (equipment)
+            {
+                equipment.equipmentUpdated -= UpdateWeapon;
+            }
         }
 
         void Start()
@@ -65,6 +85,20 @@ namespace RPG.Combat
         {
             currentWeaponConfig = weapon;
             currentWeapon = AttachWeapon(weapon);
+        }
+
+        void UpdateWeapon()
+        {
+            WeaponConfig weapon = equipment.GetItemInSlot(EquipLocation.Weapon) as WeaponConfig;
+
+            if (weapon == null)
+            {
+                EquipWeapon(defaultWeaponConfig);
+            }
+            else
+            {
+                EquipWeapon(weapon);
+            }
         }
         
         Weapon AttachWeapon(WeaponConfig weapon)
@@ -152,22 +186,6 @@ namespace RPG.Combat
             anim.SetTrigger("StopAttack");
         }
         
-        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return currentWeaponConfig.GetDamage();
-            }
-        }
-
-        public IEnumerable<float> GetPercentageModifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return currentWeaponConfig.GetPercantageBonus();
-            }
-        }
-
         public void Cancel()
         {
             StopAttack();

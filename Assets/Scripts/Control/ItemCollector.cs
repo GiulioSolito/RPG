@@ -12,7 +12,7 @@ namespace RPG.Control
 
         private Mover mover;
         private ActionScheduler scheduler;
-        private WeaponPickup pickup;
+        private ClickablePickup pickup;
 
         void Awake()
         {
@@ -28,14 +28,14 @@ namespace RPG.Control
             if (Vector3.Distance(transform.position, pickup.transform.position) <= pickupDistance)
             {
                 mover.Cancel();
-                pickup.StartPickup();
+                pickup.Pickup();
             }
         }
 
-        public void StartPickupCollector(WeaponPickup weaponPickup)
+        public void StartPickupCollector(ClickablePickup pickup)
         {
             scheduler.StartAction(this);
-            pickup = weaponPickup;
+            this.pickup = pickup;
         }
 
         public void StopPickup()

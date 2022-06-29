@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using RPG.Attributes;
 using RPG.Control;
-using RPG.Movement;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -15,15 +13,6 @@ namespace RPG.Combat
 
         private GameObject callingFighter;
         
-        // void OnTriggerEnter(Collider other)
-        // {
-        //     if (!other.CompareTag("Player")) return;
-        //
-        //     callingFighter = other.GetComponent<Fighter>();
-        //     
-        //     Pickup(callingFighter);
-        // }
-
         public void StartPickup()
         {
             Pickup(callingFighter);
@@ -77,7 +66,7 @@ namespace RPG.Combat
             if (Input.GetMouseButtonDown(0))
             {
                 callingFighter = callingController.gameObject;
-                collector.StartPickupCollector(this);
+                // collector.StartPickupCollector(this);
             }
 
             return true;

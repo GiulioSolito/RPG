@@ -66,13 +66,17 @@ namespace RPG.Combat
             Health health = other.GetComponent<Health>();
 
             if (other.transform == projectileOwner) return;
-            if (health.IsDead) return;
-            
-            if (health == target)
-            {
-                target.TakeDamage(instigator, damage);
-            }
 
+            if (health != null)
+            {
+                if (health.IsDead) return;
+                if (health == target)
+                {
+                    target.TakeDamage(instigator, damage);
+                    
+                }
+            }
+            
             speed = 0;
             onHit.Invoke();
             
