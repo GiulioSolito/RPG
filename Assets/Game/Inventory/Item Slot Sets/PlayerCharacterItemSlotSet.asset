@@ -17,6 +17,10 @@ MonoBehaviour:
     m_Category:
       m_Name: Weapons
       m_ItemCategory: {fileID: 11400000, guid: 9d4b844deba5f294b8da14855e9a7f03, type: 2}
+  - m_Name: Left Hand
+    m_Category:
+      m_Name: Weapons
+      m_ItemCategory: {fileID: 11400000, guid: 9d4b844deba5f294b8da14855e9a7f03, type: 2}
   - m_Name: Head
     m_Category:
       m_Name: Head Wear

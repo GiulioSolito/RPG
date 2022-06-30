@@ -327,6 +327,18 @@ MonoBehaviour:
       m_Values: 
       m_UnityObjects: []
       m_Version: 
+--- !u!114 &3814613118788175675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601693186297265545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82ccbd1fc144d9e8e6ff5d06c99a412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3926016986955394667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,32 +386,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 0}
   equipmentPanel: {fileID: 0}
---- !u!114 &8992388039929501120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6601693186297265545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7540d24761b4f024d8d8a6014f93d9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ItemCollectionRestrictionObjects: []
-  m_ItemCollectionData: []
---- !u!114 &3814613118788175675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6601693186297265545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e82ccbd1fc144d9e8e6ff5d06c99a412, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8552293574646990614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +399,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupDistance: 1
+--- !u!114 &8992388039929501120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601693186297265545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7540d24761b4f024d8d8a6014f93d9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ItemCollectionRestrictionObjects: []
+  m_ItemCollectionData:
+  - m_ObjectType: Opsive.UltimateInventorySystem.Core.InventoryCollections.ItemCollection
+    m_ValueHashes: 0d00eb25b769d11d5030ac3ef1f5543f666e77ff063d5314aacf0d993edd1331719c8809
+    m_ValuePositions: 0000000009000000090000000d0000000d0000000e0000000f0000001300000013000000
+    m_Values: 496e76656e746f7279010000000001ffffffff00000000
+    m_UnityObjects: []
+    m_Version: 3.1
+  - m_ObjectType: Opsive.UltimateInventorySystem.Core.InventoryCollections.ItemSlotCollection
+    m_ValueHashes: 0d00eb25b769d11d5030ac3ef1f5543f666e77ff063d5314aacf0d993edd1331719c88096ea76198ae473e860963cb9e
+    m_ValuePositions: 0000000008000000080000000c0000000c0000000d0000000e0000001200000012000000160000001a0000001b000000
+    m_Values: 4571756970706564030000000001ffffffff00000000000000000000
+    m_UnityObjects:
+    - {fileID: 11400000, guid: 95f36b98a3dcacf4d91ba65bd9163067, type: 2}
+    m_Version: 3.1
+--- !u!114 &1489034989517494306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601693186297265545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25cb047ddf2412eb6cef58b7e8053e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Inventory: {fileID: 8992388039929501120}
+  m_EquipmentItemCollectionID:
+    m_Name: Equipment
+    m_Purpose: 3
+  m_EquipablePrefabAttributeName: EquipmentPrefab
+  m_UsableItemPrefabAttributeName: UsableItemPrefab
+  m_ItemSlotSet: {fileID: 11400000, guid: 95f36b98a3dcacf4d91ba65bd9163067, type: 2}
+  m_Slots:
+  - m_Name: Right Hand
+    m_Category:
+      m_Name: Weapons
+      m_ItemCategory: {fileID: 11400000, guid: 9d4b844deba5f294b8da14855e9a7f03, type: 2}
+    m_IsSkinnedEquipment: 0
+    m_Transform: {fileID: 2412182324047917224}
+    m_ItemObject: {fileID: 0}
+    m_HideWhenWearingEquipment: []
+  - m_Name: Head
+    m_Category:
+      m_Name: Head Wear
+      m_ItemCategory: {fileID: 11400000, guid: 372af74895cd7ce448e10fbcc5e63e31, type: 2}
+    m_IsSkinnedEquipment: 0
+    m_Transform: {fileID: 0}
+    m_ItemObject: {fileID: 0}
+    m_HideWhenWearingEquipment: []
+  - m_Name: Chest
+    m_Category:
+      m_Name: Chest Wear
+      m_ItemCategory: {fileID: 11400000, guid: 3279369dfeee6e04e93ea91faee25769, type: 2}
+    m_IsSkinnedEquipment: 0
+    m_Transform: {fileID: 0}
+    m_ItemObject: {fileID: 0}
+    m_HideWhenWearingEquipment: []
+  - m_Name: Legs
+    m_Category:
+      m_Name: Leg Wear
+      m_ItemCategory: {fileID: 11400000, guid: db37ff6fa00e20640a75f21e1e14c91b, type: 2}
+    m_IsSkinnedEquipment: 0
+    m_Transform: {fileID: 0}
+    m_ItemObject: {fileID: 0}
+    m_HideWhenWearingEquipment: []
+  m_MainRootNode: {fileID: 0}
 --- !u!4 &6965591335891833324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8196697675836667564, guid: 750e3c6876a501e42b5827ec7a3d24d1,
