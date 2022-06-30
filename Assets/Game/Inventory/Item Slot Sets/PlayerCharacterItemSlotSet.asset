@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9d0f19db9c7d949b5317a193f72cd0, type: 3}
+  m_Name: PlayerCharacterItemSlotSet
+  m_EditorClassIdentifier: 
+  m_ItemSlots:
+  - m_Name: Right Hand
+    m_Category:
+      m_Name: Weapons
+      m_ItemCategory: {fileID: 11400000, guid: 9d4b844deba5f294b8da14855e9a7f03, type: 2}
+  - m_Name: Head
+    m_Category:
+      m_Name: Head Wear
+      m_ItemCategory: {fileID: 11400000, guid: 372af74895cd7ce448e10fbcc5e63e31, type: 2}
+  - m_Name: Chest
+    m_Category:
+      m_Name: Chest Wear
+      m_ItemCategory: {fileID: 11400000, guid: 3279369dfeee6e04e93ea91faee25769, type: 2}
+  - m_Name: Legs
+    m_Category:
+      m_Name: Leg Wear
+      m_ItemCategory: {fileID: 11400000, guid: db37ff6fa00e20640a75f21e1e14c91b, type: 2}

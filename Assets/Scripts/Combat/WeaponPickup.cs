@@ -77,7 +77,7 @@ namespace RPG.Combat
             if (Input.GetMouseButtonDown(0))
             {
                 callingFighter = callingController.gameObject;
-                collector.StartPickupCollector(this);
+                // collector.StartPickupCollector(this);
             }
 
             return true;

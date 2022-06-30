@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   maxSpeed: 6
+  maxNavPathLength: 40
 --- !u!114 &1532392227974883059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +204,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isInvulnerable: 0
   onDie:
     m_PersistentCalls:
       m_Calls:

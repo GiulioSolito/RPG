@@ -19,7 +19,7 @@ namespace RPG.SceneManagement
             savingSystem = GetComponent<SavingSystem>();
             fader = FindObjectOfType<Fader>();
 
-            StartCoroutine(LoadLastScene());
+            // StartCoroutine(LoadLastScene());
         }
 
         IEnumerator LoadLastScene()
