@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Opsive.UltimateInventorySystem.Core;
+using Opsive.UltimateInventorySystem.Core.AttributeSystem;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
@@ -9,7 +11,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         [BoxGroup("Hand Transforms")]
         [SerializeField] private Transform rightHandTransform;
@@ -18,8 +20,17 @@ namespace RPG.Combat
         
         [BoxGroup("Weapon")]
         [SerializeField] private WeaponConfig defaultWeaponConfig;
-        private WeaponConfig currentWeaponConfig;
-        private Weapon currentWeapon;
+        private Item currentWeaponConfig;
+        private Item currentWeapon;
+
+        private ItemDefinition itemDefinition;
+        
+        private Attribute<int> damageAttribute;
+        private Attribute<float> attackRateAttribute;
+        private Attribute<float> rangeAttribute;
+        private int damage;
+        private float attackRate;
+        private float range;
         
         private float nextAttack;
         
@@ -39,10 +50,6 @@ namespace RPG.Combat
 
         void Start()
         {
-            if (currentWeaponConfig == null)
-            {
-                EquipWeapon(defaultWeaponConfig);
-            }
         }
 
         void Update()
@@ -61,15 +68,19 @@ namespace RPG.Combat
             }
         }
 
-        public void EquipWeapon(WeaponConfig weapon)
+        public void EquipWeapon(Item weapon)
         {
-            currentWeaponConfig = weapon;
-            currentWeapon = AttachWeapon(weapon);
-        }
-        
-        Weapon AttachWeapon(WeaponConfig weapon)
-        {
-            return weapon.Spawn(rightHandTransform, leftHandTransform, anim);
+            currentWeapon = weapon;
+
+            itemDefinition = InventorySystemManager.GetItemDefinition(weapon.name);
+            
+            damageAttribute = itemDefinition.GetAttribute<Attribute<int>>("BaseAttack");
+            attackRateAttribute = itemDefinition.GetAttribute<Attribute<float>>("AttackRate");
+            rangeAttribute = itemDefinition.GetAttribute<Attribute<float>>("Range");
+            
+            range = rangeAttribute.GetValue();
+            range = rangeAttribute.GetValue();
+            range = rangeAttribute.GetValue();
         }
 
         public Health GetTarget()
@@ -79,7 +90,9 @@ namespace RPG.Combat
 
         bool IsInRange(Transform targetTransform)
         {
-            return Vector3.Distance(transform.position, targetTransform.position) <= currentWeaponConfig.GetAttackRange();
+            
+            
+            return Vector3.Distance(transform.position, targetTransform.position) <= range;
         }
 
         public bool CanAttack(GameObject combatTarget)
@@ -108,7 +121,7 @@ namespace RPG.Combat
             {
                 //This will trigger the Hit() event
                 TriggerAttack();
-                nextAttack = Time.time + currentWeaponConfig.GetAttackRate();
+                nextAttack = Time.time + attackRate;
             }
         }
 
@@ -127,13 +140,13 @@ namespace RPG.Combat
 
             if (currentWeapon != null)
             {
-                currentWeapon.OnHit();
+                // currentWeapon.OnHit();
             }
             
-            if (currentWeaponConfig.HasProjectile())
-            {
-                currentWeaponConfig.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
-            }
+            // if (currentWeaponConfig.HasProjectile())
+            // {
+            //     currentWeaponConfig.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
+            // }
             else
             {
                 target.TakeDamage(gameObject, damage);
@@ -156,17 +169,17 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeaponConfig.GetDamage();
+                yield return damage;
             }
         }
 
-        public IEnumerable<float> GetPercentageModifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return currentWeaponConfig.GetPercantageBonus();
-            }
-        }
+        // public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        // {
+        //     if (stat == Stat.Damage)
+        //     {
+        //         yield return currentWeaponConfig.GetPercantageBonus();
+        //     }
+        // }
 
         public void Cancel()
         {
@@ -184,7 +197,7 @@ namespace RPG.Combat
         {
             string weaponName = (string) state;
             WeaponConfig weaponConfig = Resources.Load<WeaponConfig>(weaponName);
-            EquipWeapon(weaponConfig);
+            // EquipWeapon(weaponConfig);
         }
     }
 }
