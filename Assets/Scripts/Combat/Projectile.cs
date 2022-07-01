@@ -76,7 +76,7 @@ namespace RPG.Combat
                     target.TakeDamage(instigator, damage);
                 }
             }
-
+            
             speed = 0;
             onHit.Invoke();
             

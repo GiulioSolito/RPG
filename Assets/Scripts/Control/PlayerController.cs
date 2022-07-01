@@ -21,6 +21,8 @@ namespace RPG.Control
         [SerializeField] private CursorMapping[] cursorMappings;
         [SerializeField] private float maxNavMeshProjectionDistance = 1f;
         [SerializeField] private float raycastRadius = 1f;
+
+        private bool isDraggingUI = false;
         
         private Mover mover;
         private Fighter fighter;
@@ -51,9 +53,25 @@ namespace RPG.Control
         
         bool InteractWithUI()
         {
-            if (!EventSystem.current.IsPointerOverGameObject()) return false;
-            SetCursor(CursorType.UI);
-            return true;
+            if (Input.GetMouseButtonUp(0))
+            {
+                isDraggingUI = false;
+            }
+
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    isDraggingUI = true;
+                }
+
+                SetCursor(CursorType.UI);
+                return true;
+            }
+
+            if (isDraggingUI) return true;
+            
+            return false;
         }
         
         bool InteractWithComponent()
