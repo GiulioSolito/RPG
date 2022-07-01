@@ -96,11 +96,32 @@ MonoBehaviour:
       m_Values: 45717569706d656e745072656661620100000000541e2f5fffffffffffffffff
       m_UnityObjects: []
       m_Version: 3.1
+    - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[UnityEngine.AnimatorOverrideController,
+        UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+      m_ValueHashes: 0d00eb255b713f72086efd3934ebab2af446621ba8823c4ab974dab9fd467426
+      m_ValuePositions: 0000000011000000120000001200000016000000160000001a0000001e000000
+      m_Values: 416e696d61746f724f766572726964657201010000002521c699ffffffffffffffff
+      m_UnityObjects: []
+      m_Version: 3.1
     - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[System.Int32,
         mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
       m_ValueHashes: 0d00eb255b713f72086efd3934ebab2af446621ba8823c4a424b280f861dc27b
       m_ValuePositions: 000000000a0000000b0000000b0000000f0000000f0000001300000017000000
       m_Values: 4261736541747461636b00010000008ee548720100000001000000
+      m_UnityObjects: []
+      m_Version: 3.1
+    - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[System.Single,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+      m_ValueHashes: 0d00eb255b713f72086efd3934ebab2af446621ba8823c4acc215ba710f4f413
+      m_ValuePositions: 000000000a0000000b0000000b0000000f0000000f0000001300000017000000
+      m_Values: 41747461636b526174650101000000338aa1650000803f0000803f
+      m_UnityObjects: []
+      m_Version: 3.1
+    - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[System.Single,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+      m_ValueHashes: 0d00eb255b713f72086efd3934ebab2af446621ba8823c4acc215ba710f4f413
+      m_ValuePositions: 000000000b0000000c0000000c00000010000000100000001400000018000000
+      m_Values: 41747461636b52616e67650101000000302a16210000004000000040
       m_UnityObjects: []
       m_Version: 3.1
     - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[System.Int32,

@@ -1,4 +1,7 @@
 ﻿using System;
+using Opsive.UltimateInventorySystem.Core;
+using Opsive.UltimateInventorySystem.Equipping;
+using RPG.Combat;
 using RPG.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -17,7 +20,28 @@ namespace RPG.Stats
         [SerializeField] private GameObject levelUpParticleEffect;
         [TabGroup("Modifier")]
         [SerializeField] private bool shouldUseModifiers = false;
-        
+
+        public float damage = 5;
+        public float Damage
+        {
+            get => damage;
+            set => damage = value;
+        }
+
+        public float attackRate = 1f;
+        public float AttackRate
+        {
+            get => attackRate;
+            set => attackRate = value;
+        }
+
+        public float attackRange = 2f;
+        public float AttackRange
+        {
+            get => attackRange;
+            set => attackRange = value;
+        }
+
         public event Action onLevelUp;
 
         private int currentLevel = 0;

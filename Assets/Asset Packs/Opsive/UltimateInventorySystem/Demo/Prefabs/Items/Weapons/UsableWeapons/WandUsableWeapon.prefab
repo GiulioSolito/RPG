@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,7 +52,7 @@ MonoBehaviour:
     m_ItemAmount:
       m_Amount: 0
       m_Item:
-        m_ID: 3354254288
+        m_ID: 1311519649
         m_Name: 
         m_ItemDefinitionID: 0
         m_ItemDefinition: {fileID: 0}
@@ -177,7 +178,7 @@ MonoBehaviour:
     m_UnityObjects:
     - {fileID: 5570442772240312002}
     m_Version: 3.1
-  m_ItemCategory: {fileID: 11400000, guid: 834ae4758c191c443b69abf703fdd595, type: 2}
+  m_ItemCategory: {fileID: 11400000, guid: 4d4615e4a7fa33e498299c1d5de03500, type: 2}
 --- !u!114 &7162432486114383576
 MonoBehaviour:
   m_ObjectHideFlags: 0

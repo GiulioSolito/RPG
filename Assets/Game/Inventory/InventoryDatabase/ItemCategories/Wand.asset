@@ -152,6 +152,27 @@ MonoBehaviour:
       m_Values: 536861706549636f6e01000000004546ececffffffffffffffff
       m_UnityObjects: []
       m_Version: 3.1
+    - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[System.Single,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+      m_ValueHashes: 0d00eb255b713f72086efd3934ebab2af446621ba8823c4acc215ba710f4f413
+      m_ValuePositions: 000000000a0000000b0000000b0000000f0000000f0000001300000017000000
+      m_Values: 41747461636b526174650000000000338aa165000000000000803f
+      m_UnityObjects: []
+      m_Version: 3.1
+    - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[System.Single,
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+      m_ValueHashes: 0d00eb255b713f72086efd3934ebab2af446621ba8823c4acc215ba710f4f413
+      m_ValuePositions: 000000000b0000000c0000000c00000010000000100000001400000018000000
+      m_Values: 41747461636b52616e67650000000000302a16210000000000000040
+      m_UnityObjects: []
+      m_Version: 3.1
+    - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[UnityEngine.AnimatorOverrideController,
+        UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+      m_ValueHashes: 0d00eb255b713f72086efd3934ebab2af446621ba8823c4ab974dab9fd467426
+      m_ValuePositions: 0000000011000000120000001200000016000000160000001a0000001e000000
+      m_Values: 416e696d61746f724f766572726964657201000000002521c699ffffffffffffffff
+      m_UnityObjects: []
+      m_Version: 3.1
   m_RequiredItemAttributes:
     m_AttributeCollectionData:
     - m_ObjectType: Opsive.UltimateInventorySystem.Core.AttributeSystem.Attribute`1[[Opsive.UltimateInventorySystem.Core.DataStructures.ItemAmounts,

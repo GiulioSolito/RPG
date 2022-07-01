@@ -8,9 +8,9 @@ namespace RPG.Combat
     {
         [SerializeField] private AnimatorOverrideController animatorOverride;
         [SerializeField] private Weapon equippedPrefab;
-        [SerializeField] private float attackRange = 2f;
-        [SerializeField] private float attackRate = 1f;
-        [SerializeField] private float damage = 5f;
+        public float attackRange = 2f;
+        public float attackRate = 1f;
+        public float damage = 5f;
         [SerializeField] private float percentageBonus = 0;
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private Projectile projectile;
