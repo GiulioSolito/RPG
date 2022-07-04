@@ -7,6 +7,9 @@ namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
+        [SerializeField] private KeyCode saveKey = KeyCode.S;
+        [SerializeField] private KeyCode loadKey = KeyCode.L;
+        [SerializeField] private KeyCode deleteKey = KeyCode.Delete;
         [SerializeField] private float fadeInTime = 0.2f;
         
         private const string DefaultSaveFile = "Save";
@@ -31,17 +34,17 @@ namespace RPG.SceneManagement
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(saveKey))
             {
                 Save();
             }
             
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(loadKey))
             {
                 Load();
             }
 
-            if (Input.GetKeyDown(KeyCode.Delete))
+            if (Input.GetKeyDown(deleteKey))
             {
                 Delete();
             }

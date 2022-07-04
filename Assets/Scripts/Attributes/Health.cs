@@ -1,4 +1,5 @@
-﻿using RPG.Core;
+﻿using System.Collections;
+using RPG.Core;
 using GameDevTV.Saving;
 using RPG.Stats;
 using UnityEngine;
@@ -60,7 +61,7 @@ namespace RPG.Attributes
             if (health <= 0)
             {
                 onDie.Invoke();
-                Die();
+                StartCoroutine(Die());
                 AwardExperience(instigator);
             }
         }
@@ -95,11 +96,13 @@ namespace RPG.Attributes
             return health / GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
-        void Die()
+        IEnumerator Die()
         {
             IsDead = true;
             anim.SetTrigger("Die");
             scheduler.CancelCurrentAction();
+            yield return new WaitForSeconds(5f);
+            // Destroy(gameObject);
         }
         
         void AwardExperience(GameObject instigator)
@@ -129,7 +132,7 @@ namespace RPG.Attributes
             
             if (health <= 0)
             {
-                Die();
+                StartCoroutine(Die());
             }
         }
     }

@@ -10,7 +10,7 @@ namespace GameDevTV.Inventories
         Helmet,
         Necklace,
         Body,
-        Trousers,
+        Legs,
         Boots,
         Weapon,
         Shield,

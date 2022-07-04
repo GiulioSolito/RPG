@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
 
@@ -15,14 +16,22 @@ namespace GameDevTV.Inventories
         // CONFIG DATA
         [Tooltip("Allowed size")]
         [SerializeField] int inventorySize = 16;
+        [SerializeField] private List<StartingItems> startingItems;
 
         // STATE
         InventorySlot[] slots;
 
-        public struct InventorySlot
+        struct InventorySlot
         {
             public InventoryItem item;
             public int number;
+        }
+
+        [System.Serializable]
+        struct StartingItems
+        {
+            public InventoryItem item;
+            public int amount;
         }
 
         // PUBLIC
@@ -166,6 +175,11 @@ namespace GameDevTV.Inventories
         private void Awake()
         {
             slots = new InventorySlot[inventorySize];
+
+            foreach (var item in startingItems)
+            {
+                AddToFirstEmptySlot(item.item, item.amount);
+            }
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameDevTV.Inventories;
 using RPG.Attributes;
 using RPG.Stats;
